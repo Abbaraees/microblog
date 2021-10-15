@@ -40,6 +40,20 @@ class RegistrationForm(FlaskForm):
 
 
 class EditProfileForm(FlaskForm):
+    def __init__(self, original_username, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.original_usernme = original_username
+
     username = StringField("Username", validators=[DataRequired()])
     about_me = TextAreaField("About Me", validators=[Length(min=0, max=150)])
     submit = SubmitField("Update")
+
+    def validate_username(self, username):
+        """
+        Query the database and ensure that the username does not exists
+        :return:
+        """
+        if username.data != self.original_usernme:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError("Please choose another username")
