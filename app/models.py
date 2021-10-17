@@ -12,6 +12,12 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+followers = db.Table('followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+)
+
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -20,6 +26,14 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    followed = db.relationship(
+        'User',
+        secondary='followers',
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'),
+        lazy='dynamic'
+    )
 
     def __repr__(self):
         return f"<User '{self.username}'>"
@@ -42,8 +56,29 @@ class User(UserMixin, db.Model):
 
     def avatar(self, size):
         hexdigest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        url = f"https://www.gravatar.com/{hexdigest}?s={size}&d=identicon"
+        url = f"https://www.gravatar.com/avatar/{hexdigest}?s={size}&d=identicon"
         return url
+
+    def is_following(self, user):
+        return self.followed.filter(
+            followers.c.followed_id == user.id).count() > 0
+
+    def follow(self, user):
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self, user):
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def followed_posts(self):
+        followed = Post.query.join(
+            followers, (followers.c.followed_id == Post.user_id)).filter(
+                followers.c.follower_id == self.id)
+
+        # Get user's owned posts
+        own = Post.query.filter_by(user_id=self.id)
+        return followed.union(own).order_by(Post.timestamp.desc())
 
 
 class Post(db.Model):
