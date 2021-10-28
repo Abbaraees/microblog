@@ -1,29 +1,9 @@
 {% extends 'base.html' %}
-{% block content %}
-    <h1>{{ title }}</h1>
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}
-            {{ form.username(size=32) }}<br>
-            {% if form.username.errors %}
-            {% for error in form.username.errors %}
-                <span style="color: red">[{{ error }}]</span>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.about_me.label }}
-            {{ form.about_me(row=4, col=50) }}<br>
-            {% if form.about_me.errors %}
-            {% for error in form.about_me.errors %}
-                <span style="color: red">[{{ error }}]</span>
-            {% endfor %}
-            {% endif %}
-        </p>
-        <p>
-            {{ form.submit() }}
-        </p>
-    </form>
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
+    <div class="col-md-4">
+        <h1>{{ title }}</h1>
+        {{ wtf.quick_form(form) }}
+    </div>
 
-{% endblock content %}
+{% endblock app_content %}

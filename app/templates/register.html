@@ -1,37 +1,9 @@
 {% extends 'base.html' %}
-{% block content %}
-<form method="POST" novalidate>
-    {{ form.hidden_tag() }}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block app_content %}
+<div class="col-md-4">
     <h1>{{ title }}</h1>
-    <p>
-        {{ form.username.label }}
-        {{ form.username(size=32) }}<br>
-        {% for error in form.username.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.email.label }}
-        {{ form.email(size=50) }}<br>
-        {% for error in form.email.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.password.label }}
-        {{ form.password(size=32) }}<br>
-        {% for error in form.password.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-     <p>
-        {{ form.password2.label }}
-        {{ form.password2(size=32) }}<br>
-        {% for error in form.password2.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit }}</p>
+    {{ wtf.quick_form(form) }}
     <p>Already a User <a href="{{ url_for('login') }}">Login</a> </p>
-</form>
-{% endblock content %}
+</div>
+{% endblock app_content %}

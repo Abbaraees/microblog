@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block app_content %}
 <table>
     <tr>
         <td>
@@ -19,14 +19,14 @@
             <p>
                 <form method="post" action="{{ url_for('follow', username=user.username) }}">
                     {{ form.hidden_tag() }}
-                    <p>{{ form.submit(value='Follow') }}</p>
+                    <p>{{ form.submit(class_="btn btn-default", value='Follow') }}</p>
                 </form>
             </p>
             {% else %}
              <p>
                 <form method="post" action="{{ url_for('unfollow', username=user.username) }}">
                     {{ form.hidden_tag() }}
-                    <p>{{ form.submit(value='Unfollow') }}</p>
+                    <p>{{ form.submit(class_="btn btn-default",value='Unfollow') }}</p>
                 </form>
             </p>
             {% endif %}
@@ -38,11 +38,21 @@
     {% for post in posts %}
     {% include '_post.html' %}
     {% endfor %}
-    {% if prev_url %}
-        <a href="{{ prev_url }}">Newer Posts</a>
-    {% endif %}
-    {% if next_url %}
-        <a href="{{ next_url }}">Older Posts</a>
-    {% endif %}
 </div>
-{% endblock content %}
+
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous{% if not prev_url %} disabled{% endif %}">
+            <a href="{{ prev_url or '#' }}">
+                <span aria-hidden="true">&larr;</span> Newer posts
+            </a>
+        </li>
+        <li class="next{% if not next_url %} disabled{% endif %}">
+            <a href="{{ next_url or '#' }}">
+                Older posts <span aria-hidden="true">&rarr;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+{% endblock app_content %}
