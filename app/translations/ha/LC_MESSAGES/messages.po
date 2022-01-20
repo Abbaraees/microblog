@@ -1,0 +1,163 @@
+# Hausa translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-01-05 22:44+0100\n"
+"PO-Revision-Date: 2022-01-05 22:57+0100\n"
+"Last-Translator: \n"
+"Language: ha\n"
+"Language-Team: ha <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: app/__init__.py:26
+msgid "You have to logged in before you can view this resource"
+msgstr "Ya Kamata ka fara shiga kafin kaga abinda kake bukata"
+
+#: app/forms.py:10 app/forms.py:17 app/forms.py:48 app/templates/profile.html:9
+msgid "Username"
+msgstr "Sunan Mai Amfani"
+
+#: app/forms.py:11
+msgid "Password"
+msgstr "Kalmar Shiga"
+
+#: app/forms.py:12
+msgid "Remember me"
+msgstr "Tuna Da ni"
+
+#: app/forms.py:13 app/templates/register.html:7
+msgid "Login"
+msgstr "Shiga"
+
+#: app/forms.py:19
+msgid "New Password"
+msgstr "Sabuwar Kalmar Shiga"
+
+#: app/forms.py:20
+msgid "Repeat Password"
+msgstr "Maimaita Kalmar Shiga"
+
+#: app/forms.py:22
+msgid "Register"
+msgstr "Kayi rijista"
+
+#: app/forms.py:31 app/forms.py:60
+msgid "Please choose another username"
+msgstr "Ka Taimaka Ka sauya suna mai amfani"
+
+#: app/forms.py:40
+msgid "Please choose another email"
+msgstr "Ka taimka ka sauya email dinka"
+
+#: app/forms.py:49
+msgid "About Me"
+msgstr "Labarina"
+
+#: app/forms.py:50
+msgid "Update"
+msgstr "Sabunta"
+
+#: app/forms.py:68
+msgid "Say Something:"
+msgstr "Rubuta Wani Labari:"
+
+#: app/forms.py:69
+msgid "Post"
+msgstr "Tura Shi"
+
+#: app/routes.py:41
+msgid "Your Post is now live!"
+msgstr "Labarin da ka tura ya je!"
+
+#: app/routes.py:75
+msgid "Invalid Username or Password"
+msgstr "Sunan mai amfani ko kalmar shiga basuyi daidai ba"
+
+#: app/routes.py:101
+msgid "Congratulations you are now a registered user"
+msgstr "Maraba!! Yanzu ka zama daya daga cikin masu amfani"
+
+#: app/routes.py:173
+#, python-format
+msgid "You are now following %(username)s"
+msgstr "Yanxu kana bin %(username)s"
+
+#: app/routes.py:196
+#, python-format
+msgid "You are not following %(username)s"
+msgstr "Ka daina bin %(username)s"
+
+#: app/routes.py:213
+msgid "Check your Email for instructions to reset your password"
+msgstr "Ka duba email dinka domin ganin hanyar da zaka bi wajen chanza kalmar shigarka"
+
+#: app/routes.py:232
+msgid "Your password has been reset successfully!"
+msgstr "Kalmar shigarka ta sauya cikin nasara!"
+
+#: app/templates/404.html:3
+msgid "Sorry the file you requested does not exits"
+msgstr "Kayi hakuri shafin da ka bukata babu shi"
+
+#: app/templates/500.html:3
+msgid "An unexpected error has occurred"
+msgstr "An samu tseko"
+
+#: app/templates/500.html:4
+msgid "The administrator has been notified. Sorry for the inconvenience"
+msgstr "An sanar da mai kula da na'ura. kayi hakuri"
+
+#: app/templates/_navs.html:5
+msgid "Newer posts"
+msgstr "Sabbin Labarai"
+
+#: app/templates/_navs.html:10
+msgid "Older posts"
+msgstr "Tsaffin Labarai"
+
+#: app/templates/_post.html:14
+#, python-format
+msgid "%(username)s said %(when)s"
+msgstr "%(username)s yace %(when)s"
+
+#: app/templates/index.html:4
+#, python-format
+msgid "Hello %(username)s"
+msgstr "Barka da zuwa %(username)s"
+
+#: app/templates/login.html:7
+msgid "New User"
+msgstr "Sabon Mai Amfani"
+
+#: app/templates/login.html:7
+msgid "register"
+msgstr "kayi rijista"
+
+#: app/templates/login.html:8
+msgid "Forgot Your Password"
+msgstr "Na Manta Kalmar Shiga"
+
+#: app/templates/login.html:8
+msgid "Reset"
+msgstr "Sauya Ta"
+
+#: app/templates/profile.html:11
+msgid "About"
+msgstr "Labarina"
+
+#: app/templates/register.html:7
+msgid "Already a User"
+msgstr "Tsohon Mai Amfani"
+
+#~ msgid "You have to logged in before you can view this resource"
+#~ msgstr "Ya Kamata ka fara shiga kafin kaga abinda kake bukata"

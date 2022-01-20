@@ -1,8 +1,9 @@
 from datetime import datetime
 
 from flask import (
-    render_template, redirect, url_for, flash, request
+    render_template, redirect, url_for, flash, request, g
     )
+from flask_babel import _, get_locale
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
@@ -17,6 +18,7 @@ from app.email import send_reset_password_email
 
 @app.before_request
 def before_request():
+    g.locale = str(get_locale())
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
@@ -37,7 +39,7 @@ def index():
         post = Post(body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash("Your Post is now live!")
+        flash(_("Your Post is now live!"))
 
         return redirect(url_for('index'))
 
@@ -71,7 +73,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash("Invalid Username or Password")
+            flash(_("Invalid Username or Password"))
             return render_template('login.html', title="Sign In", form=form)
 
         login_user(user, remember=form.remember_me.data)
@@ -97,7 +99,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        flash("Congratulations you are now a registered user")
+        flash(_("Congratulations you are now a registered user"))
         return redirect(url_for('login'))
 
     return render_template('register.html', title="Register", form=form)
@@ -169,7 +171,7 @@ def follow(username):
 
         current_user.follow(user)
         db.session.commit()
-        flash(f"You are now following {username}")
+        flash(_("You are now following %(username)s", username=username))
         return redirect(url_for("profile", username=username))
 
     return redirect(url_for('index'))
@@ -192,7 +194,7 @@ def unfollow(username):
 
         current_user.unfollow(user)
         db.session.commit()
-        flash(f"You are not following {username}")
+        flash(_("You are not following %(username)s", username=username))
         return redirect(url_for('profile', username=username))
 
     return redirect(url_for('index'))
@@ -209,7 +211,7 @@ def password_reset_request():
         if user:
             send_reset_password_email(user)
 
-        flash("Check your Email for instructions to reset your password")
+        flash(_("Check your Email for instructions to reset your password"))
         return redirect(url_for('login'))
 
     return render_template('password_reset_request.html', title='Password Reset Request', form=form)
@@ -228,7 +230,7 @@ def password_reset(token):
     if form.validate_on_submit():
         user.set_password(form.password1.data)
         db.session.commit()
-        flash("Your password has been reset successfully!")
+        flash(_("Your password has been reset successfully!"))
 
         return redirect(url_for('login'))
 

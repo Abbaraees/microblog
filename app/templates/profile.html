@@ -6,9 +6,9 @@
             <img src="{{ user.avatar(150) }}">
         </td>
         <td>
-            <p>Username: {{ user.username }}</p>
+            <p>{{ _("Username") }}: {{ user.username }}</p>
             {% if user.about_me %}
-            <p>About: {{ user.about_me }}</p>
+            <p>{{ _("About") }}: {{ user.about_me }}</p>
             {% endif %}
             {% if user.last_seen %}
             <p>{{ moment(user.last_seen ).format('LLL')}}</p>
@@ -40,19 +40,6 @@
     {% endfor %}
 </div>
 
-<nav aria-label="...">
-    <ul class="pager">
-        <li class="previous{% if not prev_url %} disabled{% endif %}">
-            <a href="{{ prev_url or '#' }}">
-                <span aria-hidden="true">&larr;</span> Newer posts
-            </a>
-        </li>
-        <li class="next{% if not next_url %} disabled{% endif %}">
-            <a href="{{ next_url or '#' }}">
-                Older posts <span aria-hidden="true">&rarr;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+{% include '_navs.html' %}
 
 {% endblock app_content %}
