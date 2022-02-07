@@ -4,6 +4,6 @@
 <div class="col-md-4">
     <h1>{{ title }}</h1>
     {{ wtf.quick_form(form) }}
-    <p>{{ _("Already a User") }} <a href="{{ url_for('login') }}">{{ _("Login") }}</a> </p>
+    <p>{{ _("Already a User") }} <a href="{{ url_for('auth.login') }}">{{ _("Login") }}</a> </p>
 </div>
 {% endblock app_content %}
