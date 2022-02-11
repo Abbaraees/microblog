@@ -1,5 +1,9 @@
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv('.env')
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -14,6 +18,10 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS')
     ADMINS = ['abbaraees@gmail.com']
-    POST_PER_PAGE = 15
+    POST_PER_PAGE = 10
     LANGUAGES = ['en', 'ha']
     MS_TRANSLATOR_KEY = os.environ.get("MS_TRANSLATOR_KEY")
+    ELASTICSEARCH_URL = os.environ.get("ELASTICSEARCH_URL")
+    ELASTICSEARCH_CLOUD_ID = os.environ.get("ELASTICSEARCH_CLOUD_ID")
+    ELASTICSEARCH_USER = os.environ.get("ELASTICSEARCH_USER_")
+    ELASTICSEARCH_PASS = os.environ.get("ELASTICSEARCH_PASS")

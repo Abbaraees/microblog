@@ -23,12 +23,19 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                     {% else %}
-                    <li><a href="{{ url_for('main.profile', username=current_user.username) }}">Profile</a></li>
-                    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                        <li><a href="{{ url_for('main.profile', username=current_user.username) }}">Profile</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                     {% endif %}
                 </ul>
+                {% if current_user.is_authenticated %}
+                    <form class="navbar-form navbar-left" action="{{ url_for('main.search') }}" method="get">
+                        <div class="form-group">
+                            {{ g.search_form.q(size=20, class_="form-control", placeholder=g.search_form.q.label.text) }}
+                        </div>
+                    </form>
+                {% endif %}
             </div>
         </div>
     </nav>
