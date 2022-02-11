@@ -12,6 +12,7 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_babel import Babel, lazy_gettext as _l
+from elasticsearch import Elasticsearch
 
 from config import Config
 
@@ -31,6 +32,16 @@ def create_app(config_class=Config):
     app = Flask(__name__)
 
     app.config.from_object(config_class)
+
+    if os.environ.get('ELASTICSEARCH_URL'):
+        app.elasticsearch = Elasticsearch(os.environ.get('ELASTICSEARCH_URL'))
+    elif os.environ.get('ELASTICSEARCH_CLOUD_ID'):
+        app.elasticsearch = Elasticsearch(
+            cloud_id=os.environ.get('ELASTICSEARCH_CLOUD_ID'),
+            basic_auth=(os.environ.get('ELASTICSEARCH_USER'), os.environ.get('ELASTICSEARCH_PASS'))
+        )
+    else:
+        app.elasticsearch = None
 
     # Register extensions
     db.init_app(app)
