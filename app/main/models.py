@@ -80,15 +80,22 @@ class SearchableMixin(object):
             for obj in session._changes['delete']:
                 if isinstance(obj, SearchableMixin):
                     remove_from_index(cls.__tablename__, obj)
+<<<<<<< HEAD
         session._changes = None
+=======
+>>>>>>> c7ffcde9f9d0ba055e1b9151db0c8dd7f7b96dfd
 
     @classmethod
     def reindex(cls):
         for obj in cls.query:
             add_to_index(cls.__tablename__, obj)
 
+<<<<<<< HEAD
 db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
+=======
+
+>>>>>>> c7ffcde9f9d0ba055e1b9151db0c8dd7f7b96dfd
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
